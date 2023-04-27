@@ -1,0 +1,16 @@
+<?php
+declare(strict_types=1);
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div id="<?=$this->form->getAttribute('name')?>">
+<?php
+if(isset($this->form)):
+    $this->form->addSubmit(priority: -1);
+?>
+
+<?=$this->form($this->form);?>
+
+<?php endif; ?>
+</div>

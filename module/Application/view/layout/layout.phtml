@@ -1,0 +1,104 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<?= $this->doctype() ?>
+<html class="h-100" data-bs-theme="dark" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('Limatus')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+        <?php
+        $this->headLink([
+            'rel' => 'shortcut icon',
+            'type' => 'image/vnd.microsoft.icon',
+            'href' => $this->basePath() . '/img/favicon.ico'
+        ]);
+        ?>
+        <?php
+        // These are located here, but will be rendered just inside before </body> @see below
+        if (isset($this->devMode) && $this->devMode) {
+            $this->headLink()->appendStylesheet($this->basePath('css/bootstrap.css'));
+
+            $this->inlineScript()
+            ->appendFile($this->basePath('js/jquery-3.6.4.js'))
+            ->appendFile('https://unpkg.com/@popperjs/core@2/dist/umd/popper.js')
+            ->appendFile($this->basePath('js/bootstrap.js'))
+            ->appendFile($this->basePath('js/pubsub.js'));
+        } else {
+            $this->headLink()->appendStylesheet($this->basePath('css/bootstrap.min.css'));
+
+            $this->inlineScript()
+            ->appendFile($this->basePath('js/jquery-3.6.4.min.js'))
+            ->appendFile('https://unpkg.com/@popperjs/core@2')
+            ->appendFile($this->basePath('js/bootstrap.min.js'))
+            ->appendFile($this->basePath('js/pubsub.js'));
+        }
+        $this->headLink()->appendStylesheet($this->basePath('css/style.css'));
+
+        $this->inlineScript()->appendFile($this->basePath('js/app.js'));
+        ?>
+        <?= $this->headLink() ?>
+        <!-- Scripts -->
+        <?= $this->headScript() ?>
+    </head>
+    <body class="d-flex flex-column h-100">
+        <nav class="navbar navbar-expand-lg mt-0">
+            <div class="container rounded bg-body-tertiary shadow-sm">
+                <div class="navbar-brand" href="<?= $this->url('home') ?>">
+                    <span class="fs-1 fw-bold">Limatus Project</span>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="row mx-auto">
+                        <div class="col">
+                        <?php
+                            if (isset($this->headerForm)) {
+                                echo $this->form($this->headerForm);
+                            }
+                        ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <main class="flex-shrink-0 mt-5 mb-5">
+            <?=$this->modal()->systemMessage('test')?>
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                    <?php
+                        echo $this->navigation('default')
+                        ->menu()
+                        ->setMinDepth(0)
+                        ->setMaxDepth(0)
+                        ->setLiActiveClass('testClass')
+                        ->setUlClass('nav nav-tabs card-header-tabs');
+                    ?>
+                    </div>
+                    <div id="app-workspace" class="card-body">
+                        <?= $this->content ?>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer mt-auto">
+            <div class="container pb-3 rounded-top bg-body-tertiary">
+                <div class="row pt-2">
+                    <div class="col">
+                            &copy; <?= date('Y') ?>
+                            <a href="https://github.com/webinertia/bootstrap">Limatus</a> a Webinertia project.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <?=$this->inlineScript()?>
+    </body>
+</html>

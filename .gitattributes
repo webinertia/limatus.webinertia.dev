@@ -1,0 +1,6 @@
+/.github/ export-ignore
+/bin/remove-package-artifacts.php export-ignore
+/CHANGELOG.md
+# Force our line endings to be LF, even for Windows
+* text eol=lf
+# Set certain files to be binary

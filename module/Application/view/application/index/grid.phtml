@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+?>
+<div id="<?=$this->form->getAttribute('name')?>">
+<?php
+    if (isset($this->form)) {
+        echo $this->form($this->form);
+    }
+?>
+</div>
+
+
