@@ -23,7 +23,6 @@ return [
     'Laminas\Db',
     'Laminas\Router',
     'Laminas\Validator',
-    'Laminas\DeveloperTools',
     'Laminas\Diactoros',
     'Limatus',
     'Application',

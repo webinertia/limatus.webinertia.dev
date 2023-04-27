@@ -6,6 +6,8 @@ server {
     root /home/site/wwwroot/public; # changed for Laravel
     index  index.php index.html index.htm;
     server_name  example.com www.example.com;
+    gzip on;
+    gzip_types "*";
 
     location / {
         try_files $uri $uri/ /index.php?$args; # changed for Laravel
